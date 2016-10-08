@@ -4,34 +4,39 @@ package protectoandroid.desarrollo.com.proyectoandroid.Model;
  * Created by ArkMetal on 20/09/2016.
  */
 public class Inspeccion {
-    String nroOrden;
-    String fecha;
-    String cantidadMuestra;
-    String lugar;
-    String latitud;
-    String longitud;
+    private int id;
+    private String nroInspect;
+    private String fecha;
+    private int cantidadMuestra;
+    private String lugar;
 
-    public Inspeccion(String nroOrden,
+    public Inspeccion(int id,
+                      String nroInspect,
             String fecha,
-            String cantidadMuestra,
-            String lugar,
-            String latitud,
-            String longitudl){
-        this.nroOrden = nroOrden;
+                      int cantidadMuestra,
+            String lugar){
+        this.id = id;
+        this.nroInspect = nroInspect;
         this.fecha = fecha;
         this.cantidadMuestra = cantidadMuestra;
         this.lugar = lugar;
-        this.latitud = latitud;
-        this.longitud = longitud;
 
     }
 
-    public String getNroOrden() {
-        return nroOrden;
+    public int getId() {
+        return id;
     }
 
-    public void setNroOrden(String nroOrden) {
-        this.nroOrden = nroOrden;
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getNroInspect() {
+        return nroInspect;
+    }
+
+    public void setNroInspect(String nroInspect) {
+        this.nroInspect = nroInspect;
     }
 
     public String getFecha() {
@@ -42,11 +47,11 @@ public class Inspeccion {
         this.fecha = fecha;
     }
 
-    public String getCantidadMuestra() {
+    public int getCantidadMuestra() {
         return cantidadMuestra;
     }
 
-    public void setCantidadMuestra(String cantidadMuestra) {
+    public void setCantidadMuestra(int cantidadMuestra) {
         this.cantidadMuestra = cantidadMuestra;
     }
 
@@ -56,21 +61,5 @@ public class Inspeccion {
 
     public void setLugar(String lugar) {
         this.lugar = lugar;
-    }
-
-    public String getLatitud() {
-        return latitud;
-    }
-
-    public void setLatitud(String latitud) {
-        this.latitud = latitud;
-    }
-
-    public String getLongitud() {
-        return longitud;
-    }
-
-    public void setLongitud(String longitud) {
-        this.longitud = longitud;
     }
 }
