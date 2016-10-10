@@ -1,11 +1,6 @@
-package protectoandroid.desarrollo.com.proyectoandroid.Activities;
+package protectoandroid.desarrollo.com.proyectoandroid.Services;
 
 import android.content.Context;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 
 import com.android.volley.AuthFailureError;
@@ -26,50 +21,26 @@ import java.util.List;
 import java.util.Map;
 
 import protectoandroid.desarrollo.com.proyectoandroid.Adapters.InspeccionAdapter;
-import protectoandroid.desarrollo.com.proyectoandroid.Adapters.OrdenAdapter;
 import protectoandroid.desarrollo.com.proyectoandroid.Model.Inspeccion;
-import protectoandroid.desarrollo.com.proyectoandroid.Model.Orden;
-import protectoandroid.desarrollo.com.proyectoandroid.R;
-import protectoandroid.desarrollo.com.proyectoandroid.Services.InspeccionServices;
 import protectoandroid.desarrollo.com.proyectoandroid.Utils.ServicesUtil;
 import protectoandroid.desarrollo.com.proyectoandroid.Utils.StaticParams;
 
-public class InspectionActivity extends AppCompatActivity {
+/**
+ * Created by ArkMetal on 08/10/2016.
+ */
 
-    private InspeccionAdapter adapter;
-    private Context context;
+public class InspeccionServices {
+
     private List<Inspeccion> preList = new ArrayList<>();
     private RequestQueue requestQueue;
+    private Context context;
 
-    public Context getContext() {
-        return context;
-    }
-
-    public void setContext(Context context) {
+    public InspeccionServices(Context context){
         this.context = context;
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_inspection);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        setContext(this);
-
-        Bundle extras = getIntent().getExtras();
-        String nroOrden = null, cliente;
-        int id = 0;
-        if (extras != null) {
-            nroOrden = extras.getString("nroOrden");
-            cliente = extras.getString("cliente");
-            id = extras.getInt("id");
-        }
-        GetInspectsByOrder(id);
-    }
-
-    public void GetInspectsByOrder(int idOrder){
-        requestQueue = Volley.newRequestQueue(this);
+    public List<Inspeccion> GetInspectsByOrder(int idOrder){
+        requestQueue = Volley.newRequestQueue(context);
 
         JsonArrayRequest jsonObjectRequest = new JsonArrayRequest(Request.Method.GET,
                 ServicesUtil.INSPECCION_URL + "/" + Integer.toString(idOrder), null,
@@ -91,13 +62,6 @@ public class InspectionActivity extends AppCompatActivity {
                                 preList.add(inspect);
                             }
 
-                            adapter = new InspeccionAdapter(context, preList);
-
-                            RecyclerView recyclerView = (RecyclerView)findViewById(R.id.recyclerViewInspect);
-                            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context);
-                            recyclerView.setLayoutManager(linearLayoutManager);
-                            recyclerView.setAdapter(adapter);
-
                         }catch(JSONException e){
                             e.printStackTrace();
                         }
@@ -117,6 +81,7 @@ public class InspectionActivity extends AppCompatActivity {
         }
         };
         requestQueue.add(jsonObjectRequest);
-    }
 
+        return preList;
+    }
 }

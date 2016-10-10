@@ -70,10 +70,10 @@ public class InspeccionAdapter extends RecyclerView.Adapter<InspeccionAdapter.Cu
     @Override
     public void onBindViewHolder(InspeccionAdapter.CustomViewHolder holder, final int position) {
         Inspeccion inspeccion = list.get(position);
-        holder.cantidadMuestra.setText(inspeccion.getCantidadMuestra());
-        holder.nroInspect.setText(inspeccion.getNroInspect());
-        holder.fecha.setText(inspeccion.getFecha());
-        holder.lugar.setText(inspeccion.getLugar());
+        holder.cantidadMuestra.setText(Integer.toString(inspeccion.getCantidadMuestra()));
+        holder.nroInspect.setText(inspeccion.getNroInspect()== null ? "" : inspeccion.getNroInspect());
+        holder.fecha.setText(inspeccion.getFecha() == null ? "" : inspeccion.getFecha() );
+        holder.lugar.setText(inspeccion.getLugar()== null ? "" : inspeccion.getLugar());
         //holder.cover.setImageDrawable(Integer.parseInt(R.drawable.inspeccion_image));
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
